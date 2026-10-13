@@ -1,4 +1,4 @@
-# 🦍 Spatial Movement Ecology & Intergroup Dynamics in Mountain Gorillas
+# 🦍 Spatial Movement Ecology & Intergroup Dynamics in Mountain Gorillas (A Simulated Project)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
@@ -54,7 +54,7 @@ Any future use of real institutional or field data would require the appropriate
 
 ---
 
-### 📊 Key Findings Summary
+### 📊 Key Findings Summary (Simulated Resuls)
 
 **Finding 1 — Daily movement is short and temporally consistent**
 The mean daily path length was **1.30 ± 0.19 km** across all six groups, with a coefficient of variation of just 0.15. This low variability means group movement is highly routine and predictable from day to day. Pablo was the most active group (1.51 km/day), Umubano the least (1.12 km/day), consistent with group size differences.
