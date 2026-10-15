@@ -175,55 +175,63 @@ A valid analysis should calculate the same prespecified statistic for the observ
 
 ## Core Formulas
 
+The equations below use GitHub-supported `math` code fences and standard LaTeX commands for consistent rendering in the README.
+
 ### Great-circle distance (Haversine)
 
 For two latitude/longitude locations, with angles in radians:
 
-$$
+```math
 a=\sin^2\left(\frac{\Delta\phi}{2}\right)+\cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta\lambda}{2}\right)
-$$
+```
 
-$$
-d=2R\,\operatorname{atan2}\left(\sqrt{a},\sqrt{1-a}\right),\qquad R=6371\text{ km}
-$$
+```math
+d=2R\arcsin\left(\sqrt{a}\right),\qquad R=6371\,\mathrm{km}
+```
 
 ### Daily path length, speed, and coefficient of variation
 
-$$
+```math
 \mathrm{DPL}_{g,d}=\sum_{t=2}^{T_{g,d}} d_{g,t},\qquad v_{g,t}=\frac{d_{g,t}}{\Delta t}
-$$
+```
 
-$$
+```math
 \mathrm{CV}_g=\frac{s_g}{\overline{\mathrm{DPL}}_g}
-$$
+```
 
 Here, $d_{g,t}$ is the distance between consecutive fixes, $\Delta t$ is elapsed time, and $s_g$ is the standard deviation of a group's daily path lengths. The saved daily CV estimates range from 0.1037 to 0.1075.
 
 ### Nest-to-nest distance and daily minimum separation
 
-$$
+```math
 N_{g,d}=d\left(\mathbf{x}^{\mathrm{nest}}_{g,d},\mathbf{x}^{\mathrm{nest}}_{g,d-1}\right)
-$$
+```
 
-$$
+```math
 D_{ab,d}=\min_{t\in d} d\left(\mathbf{x}_{a,t},\mathbf{x}_{b,t}\right)
-$$
+```
 
 The second expression describes the daily minimum distance between groups $a$ and $b$ over matched timestamps on day $d$.
 
 ### MCP and KDE home-range area
 
-$$
-A_{\mathrm{MCP}}=\operatorname{Area}\left(\operatorname{ConvHull}\{(x_i,y_i)\}\right)
-$$
+```math
+A_{\mathrm{MCP}}=\mathrm{Area}\left(\mathrm{ConvHull}\{(x_i,y_i)\}_{i=1}^{n}\right)
+```
 
-For KDE, the $p$% utilization region $R_p$ is the highest-density region containing $p$% of estimated utilization probability; its area is $A_p=\int_{R_p}dA$. The current implementation approximates these calculations on a grid and uses a local coordinate conversion, so the resulting estimates should be interpreted as outputs of this implementation rather than definitive ecological home ranges.
+For KDE, the $p$% utilization region $R_p$ is the highest-density region containing $p$% of estimated utilization probability. Its area is:
+
+```math
+A_p=\int_{R_p} dA
+```
+
+The current implementation approximates these calculations on a grid and uses a local coordinate conversion, so the resulting estimates should be interpreted as outputs of this implementation rather than definitive ecological home ranges.
 
 ### Bhattacharyya coefficient for spatial overlap
 
-$$
+```math
 BC(P,Q)=\int\sqrt{p(\mathbf{x})q(\mathbf{x})}\,d\mathbf{x}\ \approx\ \sum_i\sqrt{p_iq_i}
-$$
+```
 
 The current notebook normalizes the two gridded KDE surfaces before calculating this coefficient. Reported overlap ranges from 0.000 to 0.835 for the highlighted pairs.
 
@@ -231,15 +239,15 @@ The current notebook normalizes the two gridded KDE surfaces before calculating 
 
 The current code calculates a standardized mean difference as:
 
-$$
+```math
 d=\frac{\bar{x}-\bar{y}}{\sqrt{(s_x^2+s_y^2)/2}}
-$$
+```
 
 Its reported value is $d=-0.8994$, but it should not be interpreted until the observed and null statistics are defined on the same scale and sampling unit. For a corrected one-sided Monte Carlo permutation test, use the same statistic $T$ in both the observed data and each of $B$ permutations, for example:
 
-$$
+```math
 \hat{p}=\frac{1+\sum_{b=1}^{B} I(T_b\geq T_{\mathrm{obs}})}{B+1}
-$$
+```
 
 The formula above is a recommended corrected-test convention; it is **not** the exact formula currently implemented in the notebook.
 
